@@ -1,0 +1,60 @@
+{% extends "includes/base.html" %}
+{% load cache %}
+{% load static %}
+{% load events_tags %}
+
+{% block head %}
+    <link href="{% static 'bootstrap-4.4.1/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+    <link href="{% static 'css/cookie.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    {% include "includes/navbar.html" %}
+
+    <div class="container-fluid">
+      <div class="row">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            {# {% cache REDIS_CACHED_TIME events %} #}
+
+            {% simulate_db_load %}
+            {% if events %}
+                <h2>List of upcoming events</h2>
+                <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                <thea>
+                    <tr>
+                      <th>Title</th>
+                      <th>Date</th>
+                      <th>No. of participants</th>
+                      <th>Owner</th>
+                      <th>Action</th>
+                    </tr>
+                </thea>
+                {% for event in events %}
+                    <tr>
+                  <td>Event: <b>{{ event.title }}</b></td>
+                  <td>{{ event.date }}</td>
+                  <td>{{ event.number_of_participants }}</td>
+                  <td>Transylvanian Academy</td>
+                  <td>
+                      <a href="{% url 'event_details' slug=event.slug %}">
+                      <button class="btn btn-info">View</button>
+                      </a>
+                  </td>
+                </tr>
+                {% endfor %}
+                </table>
+                </div>
+
+            {% else %}
+
+                <div>
+                    <h3>Currently there are no events</h3>
+                </div>
+            {% endif %}
+            {# {% endcache %} #}
+        </main>
+      </div>
+    </div>
+{% endblock %}

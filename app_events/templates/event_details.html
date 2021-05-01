@@ -1,0 +1,50 @@
+{% extends "includes/base.html" %}
+{% load static %}
+{% load events_tags %}
+
+{% block head %}
+    <link href="{% static 'bootstrap-4.4.1/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    {% include "includes/navbar.html" %}
+    <div class="container-fluid">
+      <div class="row">
+          <h2>Event: <b>{{ event.title }}</b></h2>
+        <main role="main" class="col-md-9 ml-sm-auto">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-primary" role="alert">
+                  {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+            <div class="form-group">
+                <label>Title:</label>
+                <input class="form-control" value="{{ event.title }}" disabled>
+            </div>
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea class="form-control" style="height: 150px" disabled>{{ event.description }}</textarea>
+            </div>
+            <div class="form-group">
+                <label>Date:</label>
+                <input class="form-control" value="{{ event.date }}" disabled>
+            </div>
+            <div class="form-group">
+                <label>Created by:</label>
+                <input class="form-control" value="Transylvanian Academy" disabled>
+            </div>
+            <div class="form-group">
+                <label>No. of participants:</label>
+                <input class="form-control" value="{{ event.number_of_participants }}" disabled>
+            </div>
+        <br>
+        </main>
+      </div>
+    </div>
+
+{% endblock %}

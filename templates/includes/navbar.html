@@ -1,0 +1,11 @@
+{% load static %}
+{% load events_tags %}
+
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{% url 'events_list' %}">
+    Event Application - {% docker_container_name %}
+  </a>
+   <div href="{% url 'events_list' %}" style="color: white;">Hi !</div>
+  <ul class="navbar-nav px-3">
+  </ul>
+</nav>
